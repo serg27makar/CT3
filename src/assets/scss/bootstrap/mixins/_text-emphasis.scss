@@ -1,0 +1,24 @@
+// stylelint-disable declaration-no-important
+
+// Typography
+
+@use "sass:color";
+
+@use '@/assets/scss/bootstrap/variables' as *;
+@use '@/assets/scss/bootstrap/mixins/hover' as *;
+@use '@/assets/scss/bootstrap/mixins/deprecate' as *;
+
+
+@mixin text-emphasis-variant($parent, $color, $ignore-warning: false) {
+  #{$parent} {
+    color: $color !important;
+  }
+  @if $emphasized-link-hover-darken-percentage != 0 {
+    a#{$parent} {
+      @include hover-focus() {
+        color: color.adjust($color, $lightness: -$emphasized-link-hover-darken-percentage) !important;
+      }
+    }
+  }
+  @include deprecate("`text-emphasis-variant()`", "v4.4.0", "v5", $ignore-warning);
+}

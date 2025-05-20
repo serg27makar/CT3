@@ -1,0 +1,27 @@
+// List Groups
+@use "sass:color";
+
+
+@use '@/assets/scss/bootstrap/variables' as *;
+@use '@/assets/scss/bootstrap/mixins/hover' as *;
+
+
+@mixin list-group-item-variant($state, $background, $color) {
+  .list-group-item-#{$state} {
+    color: $color;
+    background-color: $background;
+
+    &.list-group-item-action {
+      @include hover-focus() {
+        color: $color;
+        background-color: color.adjust($background, $lightness: -5%);
+      }
+
+      &.active {
+        color: $white;
+        background-color: $color;
+        border-color: $color;
+      }
+    }
+  }
+}

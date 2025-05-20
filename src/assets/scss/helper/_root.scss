@@ -1,0 +1,62 @@
+// Do not forget to update getting-started/theming.md!
+@use "sass:map";
+
+$theme-custom: () !default;
+
+$theme-custom: map.merge(
+    (
+        "primary":    #d1e2ff,
+        "secondary":  #f1f2f1,
+        "success":    #b6e7c6,
+        "info":       #7858d7,
+        "warning":    #f3e1d0,
+        "danger":     #e7c2b8,
+        "light":      #f8f9fa,
+        "dark":       #343a40,
+        "orange":     #ffc4a0,
+        "purple":     #cbc0ff,
+        "skyblue":    #aad7ff,
+    ),
+    $theme-custom
+);
+
+$dark-primary:     rgba(71, 136, 255, 0.1);
+$dark-secondary:   rgba(108, 117, 125, 0.1);
+$dark-success:     rgba(55, 230, 178, 0.1);
+$dark-info:       rgba(135, 108, 254, 0.1);
+$dark-warning:    rgba(254, 114, 28, 0.1);
+$dark-danger:     rgba(255, 75, 75, 0.1);
+$dark-light:      rgba(199, 203, 211, 0.1);
+$dark-dark:       rgba(1, 4, 27, 0.1);
+$dark-orange:     rgba(253, 126, 20, 0.1);
+$dark-purple:     rgba(71, 49, 182, 0.1);
+
+$dark-theme-custom: () !default;
+
+$dark-theme-custom: map.merge(
+    (
+        "primary":    $dark-primary,
+        "secondary":  $dark-secondary,
+        "success":    $dark-success,
+        "info":       $dark-info,
+        "warning":    $dark-warning,
+        "danger":     $dark-danger,
+        "light":      $dark-light,
+        "dark":       $dark-dark,
+        "orange":     $dark-orange,
+        "purple":     $dark-purple,
+    ),
+    $dark-theme-custom
+);
+
+:root {
+    // Custom variable values only support SassScript inside `#{}`.
+    @each $color, $value in $theme-custom {
+      --iq-#{$color}: #{$value};
+    }
+
+    @each $color, $value in $dark-theme-custom {
+      --iq-#{$color}: #{$value};
+    }
+}
+  

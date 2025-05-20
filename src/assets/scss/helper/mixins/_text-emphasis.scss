@@ -1,0 +1,22 @@
+// stylelint-disable declaration-no-important
+
+// Typography
+
+@use "sass:color";
+
+@use '@/assets/scss/variable' as *;
+@use '@/assets/scss/bootstrap/mixins/hover' as *;
+
+
+@mixin text-emphasis-variant($parent, $color, $ignore-warning: false) {
+  #{$parent} {
+    color: $color !important;
+  }
+  @if $emphasized-link-hover-darken-percentage != 0 {
+    a#{$parent} {
+      @include hover-focus() {
+        color: color.adjust($color, $lightness: -$emphasized-link-hover-darken-percentage) !important;
+      }
+    }
+  }
+}

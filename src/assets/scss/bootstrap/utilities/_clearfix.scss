@@ -1,0 +1,6 @@
+
+@use '@/assets/scss/bootstrap/mixins/clearfix' as *;
+
+.clearfix {
+  @include clearfix();
+}

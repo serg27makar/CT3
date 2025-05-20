@@ -1,0 +1,45 @@
+@use "sass:color";
+
+@use '@/assets/scss/bootstrap/variables' as *;
+@use '@/assets/scss/bootstrap/functions' as *;
+@use '@/assets/scss/bootstrap/mixins/hover' as *;
+
+@mixin bg-variant($parent, $color, $light-text: false) {
+    #{$parent} {
+      @if $light-text == true {
+         color: color.adjust($color, $lightness: -50%) !important;
+      } @else {
+        color: color-yiq($color) !important;
+      }
+      background-color: $color !important;
+    }
+    a#{$parent},
+    button#{$parent} {
+      @include hover-focus() {
+        @if($light-text){
+          color: color.adjust($color, $lightness: -50%) !important;
+        } @else {
+          color: $white !important;
+        }
+        background-color: color.adjust($color, $lightness: -10%) !important;
+      }
+    }
+  }
+
+  @mixin bg-variant-dark($parent, $color, $light-text: false) {
+    #{$parent} {
+      background-color: $color !important;
+    }
+    a#{$parent},
+    button#{$parent} {
+      @include hover-focus() {
+        background-color: color.adjust($color, $lightness: -10%) !important;
+      }
+    }
+  }
+  
+  @mixin bg-gradient-variant($parent, $color, $ignore-warning: false) {
+    #{$parent} {
+      background: $color linear-gradient(180deg, color.mix($body-bg, $color, 15%), $color) repeat-x !important;
+    }
+  }

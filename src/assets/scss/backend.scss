@@ -1,0 +1,58 @@
+/*!
+*
+* Template: Calendify - Responsive Bootstrap 4 Admin Dashboard Template
+* Author: iqonic.design
+* Design and Developed by: iqonic.design
+* NOTE: This file contains the styling for responsive Template.
+*
+*/
+
+// Bootstrap Function and Mixines and Variables
+@use "./bootstrap/functions";
+@use "./bootstrap/mixins";
+
+// Helper Function and Mixines and Variables
+@use "./custom_variable";
+@use "./variable";
+// Custom Variables
+@use "./bootstrap/variables";
+@use "./bootstrap/root";
+
+// Bootstrap components
+@use "./bootstrap/reboot";
+@use "./bootstrap/type";
+@use "./bootstrap/images";
+@use "./bootstrap/code";
+@use "./bootstrap/grid";
+@use "./bootstrap/tables";
+@use "./bootstrap/forms";
+@use "./bootstrap/transitions";
+@use "./bootstrap/dropdown";
+@use "./bootstrap/button-group";
+@use "./bootstrap/input-group";
+@use "./bootstrap/custom-forms";
+@use "./bootstrap/nav";
+@use "./bootstrap/navbar";
+@use "./bootstrap/card";
+@use "./bootstrap/breadcrumb";
+@use "./bootstrap/pagination";
+@use "./bootstrap/badge";
+@use "./bootstrap/alert";
+@use "./bootstrap/progress";
+@use "./bootstrap/media";
+@use "./bootstrap/list-group";
+@use "./bootstrap/close";
+@use "./bootstrap/modal";
+@use "./bootstrap/tooltip";
+@use "./bootstrap/popover";
+@use "./bootstrap/carousel";
+@use "./bootstrap/print";
+
+// // Extra Components and Utilities and plugins
+@use "./components/components";
+@use "./helper/utilities";
+@use "./plugins/plugins";
+
+// // Extra Pages
+@use "./backend/pages/pages";
+@use "./backend/layouts/dashboards";

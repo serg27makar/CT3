@@ -1,0 +1,10 @@
+// stylelint-disable declaration-no-important
+
+// Visibility
+@use '@/assets/scss/bootstrap/mixins/deprecate' as *;
+
+
+@mixin invisible($visibility) {
+  visibility: $visibility !important;
+  @include deprecate("`invisible()`", "v4.3.0", "v5");
+}

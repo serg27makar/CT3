@@ -1,0 +1,12 @@
+// export const clientRoot = 'https://smarttrak.advsurv-dev.x9tech.com'
+export const clientRoot = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+//export const clientRoot = 'https://localhost:5002'
+export const stsAuthority = 'https://dev-agsio0zz.us.auth0.com'
+export const clientId = 'C55DVJ4wuTuTuW1i0yRl5WPyZ9CtQg3g'
+export const scope = 'openid email'
+export const responseType = 'token id_token'
+export const loginCallback = '/authentication/login-callback'
+export const logoutCallback = '/authentication/logout-callback'
+export const sitekey = '6LcE2LonAAAAADPzk9ctP4OYg7Owg_5WFaadZS1u'
+export const secret = '6LcE2LonAAAAAJYkw4uh4ivkdrDRe5foB5hmxcjf'
+export const videoManagerEmail ='video.manager@advantageinvestigations.com'

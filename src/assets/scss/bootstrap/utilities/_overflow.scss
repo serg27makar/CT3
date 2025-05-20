@@ -1,0 +1,7 @@
+// stylelint-disable declaration-no-important
+
+@use '@/assets/scss/bootstrap/variables' as *;
+
+@each $value in $overflows {
+  .overflow-#{$value} { overflow: $value !important; }
+}

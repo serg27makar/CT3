@@ -1,0 +1,7 @@
+// stylelint-disable declaration-no-important
+
+@use '@/assets/scss/bootstrap/variables' as *;
+
+@each $value in $user-selects {
+  .user-select-#{$value} { user-select: $value !important; }
+}

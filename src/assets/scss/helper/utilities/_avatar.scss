@@ -1,0 +1,7 @@
+@use '@/assets/scss/variable' as *;
+@use '@/assets/scss/helper/mixins/avatar' as *;
+
+
+@each $size,$value in $avatar-size {
+    .avatar-#{$value}{@include avatar($value)}
+}

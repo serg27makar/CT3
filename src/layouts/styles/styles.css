@@ -1,0 +1,89 @@
+.title-notification {
+    padding-left: 0.7rem;
+    color: #00CFE8;
+    font-weight: 600;
+}
+.text-notification {
+    font-size: 12px;
+    line-height: 18px;
+    color: #706b7b;
+}
+.close-btn {
+    display: inline-block;
+    top: -0.2rem;
+    right: 0.2rem;
+    transform: rotate(45deg);
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #6E6B7B;
+}
+.notification-date {
+    color: #B9B9C3;
+}
+.notification-item {
+    position: relative;
+    border: 1px solid;
+    padding: 1rem;
+}
+.notification-dismiss-all span {
+    color: red;
+}
+.notification-dismiss-all {
+    border: 1px solid;
+    padding-top: 0.5rem;
+}
+.iq-sub-dropdown.dropdown-menu {
+    width: 25rem;
+    display: block;
+}
+.notification-bar {
+    background: #bef8ff;
+}
+.notification-block {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+.bell-icon .las.la-bell {
+    color: red;
+}
+.navbar-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 15px;
+}
+
+.search-toggle {
+    cursor: pointer;
+}
+
+.iq-search-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+}
+
+.brand-logo {
+    padding: 1rem 2rem;
+    height: 4rem;
+}
+.brand-logo img {
+    height: 2rem;
+}

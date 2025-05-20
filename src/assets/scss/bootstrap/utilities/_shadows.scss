@@ -1,0 +1,9 @@
+// stylelint-disable declaration-no-important
+
+@use '@/assets/scss/bootstrap/variables' as *;
+
+
+.shadow-sm { box-shadow: $box-shadow-sm !important; }
+.shadow { box-shadow: $box-shadow !important; }
+.shadow-lg { box-shadow: $box-shadow-lg !important; }
+.shadow-none { box-shadow: none !important; }

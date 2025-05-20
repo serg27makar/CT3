@@ -1,0 +1,25 @@
+@use "sass:color";
+
+
+@use '@/assets/scss/bootstrap/variables' as *;
+@use '@/assets/scss/bootstrap/functions' as *;
+@use '@/assets/scss/bootstrap/mixins/hover' as *;
+
+
+@mixin badge-variant($bg) {
+  color: color-yiq($bg);
+  background-color: $bg;
+
+  @at-root a#{&} {
+    @include hover-focus() {
+      color: color-yiq($bg);
+      background-color: color.adjust($bg, $lightness: -10%);
+    }
+
+    &:focus,
+    &.focus {
+      outline: 0;
+      box-shadow: 0 0 0 $badge-focus-width rgba($bg, .5);
+    }
+  }
+}

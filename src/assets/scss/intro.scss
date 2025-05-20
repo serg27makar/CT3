@@ -1,0 +1,42 @@
+
+/*!
+*
+* Template: Calendify - Responsive Bootstrap 4 Admin Dashboard Template
+* Author: iqonic.design
+* Design and Developed by: iqonic.design
+* NOTE: This file contains the styling for responsive Template.
+*
+*/
+// Bootstrap Function and Mixines and Variables
+@use "./bootstrap/functions";
+@use "./bootstrap/mixins";
+
+// Helper Function and Mixines and Variables
+@use "./variable";
+
+@use "./bootstrap/variables";
+@use "./bootstrap/root";
+
+// Bootstrap components
+@use "./bootstrap/reboot";
+@use "./bootstrap/type";
+@use "./bootstrap/images";
+@use "./bootstrap/code";
+@use "./bootstrap/grid";
+@use "./bootstrap/forms";
+@use "./bootstrap/transitions";
+@use "./bootstrap/dropdown";
+@use "./bootstrap/button-group";
+@use "./bootstrap/nav";
+@use "./bootstrap/navbar";
+@use "./bootstrap/utilities";
+
+@use "./components/buttons";
+@use "./components/card";
+
+@use "plugins/wow-animate";
+
+@use "./backend/pages/page-content/common-css";
+@use "./intro_componants/slider";
+@use "./intro_componants/sections";
+@use "./intro_componants/footer";

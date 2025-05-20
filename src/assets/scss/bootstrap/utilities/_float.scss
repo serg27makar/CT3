@@ -1,0 +1,15 @@
+// stylelint-disable declaration-no-important
+@use "sass:map";
+
+@use '@/assets/scss/bootstrap/variables' as *;
+@use '@/assets/scss/bootstrap/mixins/breakpoints' as *;
+
+@each $breakpoint in map.keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .float#{$infix}-left  { float: left !important; }
+    .float#{$infix}-right { float: right !important; }
+    .float#{$infix}-none  { float: none !important; }
+  }
+}
