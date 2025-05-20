@@ -4,7 +4,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import {loginCallback, logoutCallback} from "@/config/config.js";
 
 const Layout = () => import("@/layouts/Layout.vue");
-const MySchedule = () => import('@/views/calendar/Schedule.vue');
 const Claims = () => import('@/views/claims/Claims.vue');
 const UserProfile = () => import('@/views/user/UserProfile.vue');
 const Login = () => import('@/views/Login.vue');
@@ -13,7 +12,6 @@ const OidcSigInCallBack = () => import('@/views/OidcSignInCallBack.vue');
 const OidcSignOutCallBack = () => import('@/views/OidcSignOutCallBack.vue');
 
 const childRoutes = [
-  { path: '/my-schedule', name: 'layout.mySchedule', meta: { name: 'MySchedule' }, component: MySchedule },
   { path: '/claims/:caseID?', name: 'layout.claims', meta: { name: 'Claims' }, component: Claims },
   { path: '/reopen-claim/:caseID?', name: 'layout.reopenClaim', meta: { name: 'Reopen Claim' }, component: ReopenClaim },
   { path: '/user-profile', name: 'app.user-profile', meta: { name: 'User Profile' }, component: UserProfile },
