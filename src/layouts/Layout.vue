@@ -31,7 +31,7 @@
         centered
         title="Session Expiring"
         @ok="signOut"
-        @hide="onHide"
+        @cancel="onHide"
     >
       <div>
         Your session is about to expire due to inactivity. {{ countdown }}
@@ -115,12 +115,9 @@ const signOut = () => {
   router.push('/');
 };
 
-const onHide = (evt) => {
-  if (evt.trigger === 'backdrop' || evt.trigger === 'cancel') {
-    sessionExpiring.value = false;
-    evt.preventDefault();
-    refreshToken();
-  }
+const onHide = () => {
+  sessionExpiring.value = false;
+  refreshToken();
 };
 
 const startTimer = (duration) => {
