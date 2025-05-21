@@ -78,7 +78,6 @@ export const useAuthStore = defineStore('auth', () => {
         getUserRole,
         getExpires,
         getSessionEnds,
-        updateSessionStart,
         setUserType,
         setUserRole,
         setLoginStatus,
