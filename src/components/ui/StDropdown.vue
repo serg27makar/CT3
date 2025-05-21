@@ -1,5 +1,5 @@
 <template>
-  <div class="st-dropdown" :class="{ 'has-error': !!error }" :style="dropdownStyle">
+  <div class="st-dropdown " :class="{ 'has-error': !!error }" :style="dropdownStyle">
     <div class="dropdown-control" @click="toggleDropdown" :class="{ open }">
       <div class="selected-placeholder">
         <template v-if="selectedDisplay.length">
@@ -144,6 +144,10 @@ function onSearch() {
   font-family: inherit;
 }
 
+.dark .dropdown-control {
+  background: #3c3c3c;
+
+}
 .dropdown-control {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -161,12 +165,20 @@ function onSearch() {
   gap: 0.25rem;
 }
 
+.dark span.placeholder {
+  color: #fff;
+  opacity: 0.9;
+}
+
 .placeholder {
   color: #232323;
   background: transparent;
   cursor: text;
 }
 
+.dark .tag {
+  background: #3c3c3c;
+}
 .tag {
   background: #eee;
   padding: 0 0.5rem;
@@ -182,6 +194,9 @@ function onSearch() {
   font-size: 0.75rem;
 }
 
+.dark .dropdown-menu {
+  background: #3c3c3c;
+}
 .dropdown-menu {
   position: absolute;
   display: block;
@@ -208,6 +223,9 @@ function onSearch() {
   padding: 0;
 }
 
+.dark .dropdown-options li {
+  color: #eee
+}
 .dropdown-options li {
   padding: 0.35rem;
   cursor: pointer;
@@ -215,10 +233,18 @@ function onSearch() {
 
 .dropdown-options li:hover {
   background: #f5f5f5;
+  color: #3c3c3c
 }
 
+.dark .dropdown-options li.selected {
+  color: #3c3c3c
+}
 .dropdown-options li.selected {
   background: #cce5ff;
+}
+
+.dark .no-options {
+  color: #eee;
 }
 
 .no-options {
