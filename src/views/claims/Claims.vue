@@ -8,7 +8,6 @@
               <div class="form-title">
                 <h3>Claims for {{ clientName }}</h3>
               </div>
-              <AccountManagerInfo />
             </div>
           </div>
         </div>
@@ -40,12 +39,11 @@ import { useUserStore } from '@/stores/users';
 import { DEV_URL, PROD_URL } from '@/core/constant';
 import EventBus from '@/core/utils/eventBus.js';
 import CasesTree from "@/views/claims/components/CasesTree.vue";
-import AccountManagerInfo from "@/layouts/components/AccountManagerInfo.vue";
 import VideoPlayer from "@/views/claims/components/VideoPlayer.vue";
 
 export default {
   name: 'Claims',
-  components: { VideoPlayer, AccountManagerInfo, CasesTree },
+  components: { VideoPlayer, CasesTree },
   setup() {
     const route = useRoute();
     const userStore = useUserStore();
