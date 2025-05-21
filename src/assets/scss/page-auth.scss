@@ -56,26 +56,10 @@ $theme-dark-card-bg: #283046 !default;
       overflow-y: auto; // For v2 scroll for long auth form
       height: calc(var(--vh, 1vh) * 100);
     }
-    .brand-logo {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-      margin: 0;
-      z-index: 1;
-    }
   }
 
   &.auth-v1 .auth-inner {
     max-width: $auth-1-inner-max-width;
-  }
-
-  .brand-logo {
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0 2rem 0;
-    .brand-text {
-      font-weight: 600;
-    }
   }
 
   .auth-footer-btn {

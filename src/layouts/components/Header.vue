@@ -3,6 +3,11 @@
       <div class="iq-navbar-custom">
         <div class="d-flex align-items-center justify-content-between">
           <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+            <div class="header-content">
+              <button class="menu-toggle" @click="toggleSidebar" v-if="isMobile">
+                <i class="ri-menu-line"></i>
+              </button>
+            </div>
             <span class="brand-logo">
                 <img :src="appLogoImage" alt="logo"/>
             </span>
@@ -48,40 +53,40 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import {ref, computed, onMounted, onBeforeUnmount} from "vue";
 import { useAppStore } from "@/stores/app";
-import { useAuthStore } from "@/stores/auth";
 import UserInfoDropdown from "@/layouts/components/UserInfoDropdown.vue";
 import Notifications from "@/layouts/components/Notifications.vue";
 import ModeSwitch from "@/components/mode/ModeSwitch.vue";
+import EventBus from "@/core/utils/eventBus.js";
 
-// App and Auth stores
 const appStore = useAppStore();
-const authStore = useAuthStore();
 
-// Sidebar state and data
-const sidebarGroupTitle = ref(true);
+const showSidebar = ref(true)
 
-// Navbar state
-const isNavbarVisible = ref(false);
-const isSearchVisible = ref(false);
-
-// Computed properties
 const appLogoImage = computed(() => appStore.appLogoImage);
-const userType = computed(() => authStore.getUserType);
 
-// Methods for toggling visibility
-const toggleNavbar = () => {
-  isNavbarVisible.value = !isNavbarVisible.value;
-};
+const isMobile = ref(false)
 
-const toggleSearch = () => {
-  isSearchVisible.value = !isSearchVisible.value;
-};
+const checkIsMobile = () => {
+  isMobile.value = window.innerWidth <= 768
+  EventBus.emit('openSidebar', !isMobile.value);
+  showSidebar.value = !isMobile.value;
+}
 
 const toggleSidebar = () => {
-  // Logic to toggle sidebar visibility (if necessary)
-};
+  showSidebar.value = !showSidebar.value
+  EventBus.emit('openSidebar', showSidebar.value)
+}
+
+onMounted(() => {
+  checkIsMobile()
+  window.addEventListener('resize', checkIsMobile)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkIsMobile)
+})
 </script>
 
 <style scoped lang="scss">

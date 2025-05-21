@@ -86,6 +86,7 @@ export const useAuthStore = defineStore('auth', () => {
         setExpires,
         setSessionEnds,
         checkLoginStatus,
+        updateSessionStart,
         reset,
     };
 });

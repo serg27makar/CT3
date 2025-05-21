@@ -92,6 +92,7 @@ export const useSecurityStore = defineStore('security', () => {
                 localStorage.setItem('sessionTimeout',  result.data.sessionTimeout);
                 localStorage.setItem('isLoggedIn', '1');
                 authStore.setUser(result.data);
+                authStore.updateSessionStart(establishedDate);
                 authStore.setExpires(result.data.expires);
 
                 axios.get('/api/auth/scopes').then(scopesResponse => {
