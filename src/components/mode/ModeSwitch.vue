@@ -10,7 +10,7 @@
             id="dark-mode"
             data-active="true"
         />
-        <label class="custom-control-label" for="dark-mode" data-mode="toggle">
+        <label class="custom-control-label custom-toggle-label" for="dark-mode" data-mode="toggle">
           <span class="switch-icon-right"><i :class="icon"></i></span>
         </label>
       </div>
@@ -52,5 +52,14 @@ const changeMode = (value) => {
 </script>
 
 <style scoped>
-
+.custom-control-label.custom-toggle-label:before,
+.custom-control-label.custom-toggle-label {
+  color: white;
+  background: none !important;
+  border: none !important;
+  font-weight: 400 !important;
+}
+.change-mode .custom-switch.custom-switch-icon label.custom-control-label .switch-icon-right i {
+  font-size: 1.2rem !important;
+}
 </style>

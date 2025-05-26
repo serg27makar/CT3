@@ -12,8 +12,11 @@
                 <img :src="appLogoImage" alt="logo"/>
             </span>
           </div>
-          <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <ModeSwitch/>
+          <MainSearch />
+
+
+
+          <div class="navbar navbar-expand-lg navbar-light p-0">
 
             <div class="navbar-collapse">
               <ul class="navbar-nav ml-auto navbar-list align-items-center">
@@ -28,25 +31,9 @@
                 </li>
               </ul>
             </div>
-          </nav>
-
-          <nav class="navbar navbar-expand-lg navbar-light p-0">
             <ModeSwitch/>
 
-            <div class="navbar-collapse">
-              <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                <!-- Notifications Item -->
-                <li class="nav-item nav-icon dropdown">
-                  <Notifications />
-                </li>
-
-                <!-- User Dropdown -->
-                <li class="caption-content">
-                  <UserInfoDropdown />
-                </li>
-              </ul>
-            </div>
-          </nav>
+          </div>
         </div>
       </div>
     </div>
@@ -59,6 +46,7 @@ import UserInfoDropdown from "@/layouts/components/UserInfoDropdown.vue";
 import Notifications from "@/layouts/components/Notifications.vue";
 import ModeSwitch from "@/components/mode/ModeSwitch.vue";
 import EventBus from "@/core/utils/eventBus.js";
+import MainSearch from "@/layouts/components/MainSearch.vue";
 
 const appStore = useAppStore();
 

@@ -2,16 +2,10 @@
   <div class="dropdown" ref="dropdownRef">
     <a
         href="#"
-        class="dropdown-toggle d-flex align-items-center"
+        class="dropdown-toggle d-flex align-items-center text-decoration-none"
         @click.prevent="toggleDropdown"
     >
-      <i class="ri-user-line ml-3 avatar-icon"></i>
-      <div class="caption ml-2">
-        <h6 class="mb-0 line-height">
-          {{ userFullName }}
-          <i class="las la-angle-down ml-1"></i>
-        </h6>
-      </div>
+      <i class="ri-user-line ml-3 mr-3 avatar-icon text-white text-decoration-none"></i>
     </a>
 
     <transition name="fade">
@@ -68,16 +62,11 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.15s ease-in-out;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 .dropdown-menu {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   z-index: 1000;
+}
+i.ri-user-line.ml-3.mr-3.avatar-icon.text-white.text-decoration-none {
+  font-size: 1.2rem;
 }
 </style>

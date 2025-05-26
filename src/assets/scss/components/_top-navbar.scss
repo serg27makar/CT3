@@ -681,7 +681,6 @@ body.sidebar-main {
 		top: 100%;
 		left: 0;
 		width: 100%;
-		background: $white;
 		@if $enable-rounded == true {
 			@include radius-mixin($border-radius);
 		}

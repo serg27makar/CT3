@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="search-toggle cursor-pointer" @click="toggleNotification">
-      <i class="ri-notification-3-line"></i>
-      <span v-if="Notifications && Notifications.length" class="badge badge-primary count-mail rounded-circle">{{ Notifications.length }}</span>
+      <i class="ri-notification-3-line notification-icon"></i>
+      <span v-if="Notifications && Notifications.length" class="notification-count">{{ Notifications.length }}</span>
       <span class="bg-primary"></span>
     </div>
-    <div v-if="showNotification" class="iq-sub-dropdown dropdown-menu">
+    <div v-if="showNotification" class="iq-sub-dropdown dropdown-menu notification-list">
       <div class="card shadow-none m-0">
         <div class="card-body p-0 ">
           <div class="p-2 notification-bar">
