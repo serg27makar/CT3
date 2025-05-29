@@ -4,18 +4,15 @@ import { createRouter, createWebHistory } from 'vue-router';
 import {loginCallback, logoutCallback} from "@/config/config.js";
 
 const Layout = () => import("@/layouts/Layout.vue");
-const Claims = () => import('@/views/claims/Claims.vue');
+const Home = () => import('@/views/home/Home.vue');
 const UserProfile = () => import('@/views/user/UserProfile.vue');
 const Login = () => import('@/views/Login.vue');
-const ReopenClaim = () => import('@/views/claims/ReopenClaim.vue');
 const OidcSigInCallBack = () => import('@/views/OidcSignInCallBack.vue');
 const OidcSignOutCallBack = () => import('@/views/OidcSignOutCallBack.vue');
 
 const childRoutes = [
-  { path: '/claims/:caseID?', name: 'layout.claims', meta: { name: 'Claims' }, component: Claims },
-  { path: '/reopen-claim/:caseID?', name: 'layout.reopenClaim', meta: { name: 'Reopen Claim' }, component: ReopenClaim },
   { path: '/user-profile', name: 'app.user-profile', meta: { name: 'User Profile' }, component: UserProfile },
-  // { path: '/home', name: 'layout.claims', meta: { name: 'Claims' }, component: Claims },
+  { path: '/home', name: 'layout.home', meta: { name: 'Home' }, component: Home },
 ];
 
 const routes = [
@@ -28,7 +25,7 @@ const routes = [
       await authStore.checkLoginStatus();
 
       if (authStore.isLoggedIn === '1') {
-        next('/claims');
+        next('/home');
       } else {
         next();
       }
@@ -71,8 +68,8 @@ router.beforeEach(async (to, from, next) => {
       console.log("Router is redirecting to login for auth required page");
       next('/');
     } else if ((isLoggedIn === '1') && to.path === '/') {
-      console.log("User is logged in, redirecting to claims");
-      next('/claims');
+      console.log("User is logged in, redirecting to home");
+      next('/home');
     } else {
       next();
     }
