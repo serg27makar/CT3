@@ -93,12 +93,12 @@ const columnsUsually = [
 
 // Init
 onMounted(() => {
-  caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
+  // caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
 })
 
 // Watchers to reload data
 watch([currentPage, perPage, searchTerm, onlyCheckIn], () => {
-  caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
+  // caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
 })
 
 // Actions

@@ -60,6 +60,6 @@ const changeMode = (value) => {
   font-weight: 400 !important;
 }
 .change-mode .custom-switch.custom-switch-icon label.custom-control-label .switch-icon-right i {
-  font-size: 1.2rem !important;
+  font-size: 1.5rem !important;
 }
 </style>

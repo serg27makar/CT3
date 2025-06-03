@@ -16,7 +16,7 @@ export const useAppStore = defineStore("app", () => {
 
     function toggleDarkMode(isDark) {
         dark.value = isDark;
-        if (!isDark) {
+        if (isDark) {
             logo.value = "/src/assets/images/logo/Advantage_Icon_GoldFoil.png";
             icon.value = "a-right ri-sun-line";
         } else {

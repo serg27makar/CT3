@@ -1,11 +1,11 @@
 <template>
-  <div class="dropdown" ref="dropdownRef">
+  <div class="dropdown ml-3 mr-3" ref="dropdownRef">
     <a
         href="#"
-        class="dropdown-toggle d-flex align-items-center text-decoration-none"
+        class="d-flex align-items-center text-decoration-none"
         @click.prevent="toggleDropdown"
     >
-      <i class="ri-user-line ml-3 mr-3 avatar-icon text-white text-decoration-none"></i>
+      <i class="ri-user-line avatar-icon text-white text-decoration-none"></i>
     </a>
 
     <transition name="fade">
@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   z-index: 1000;
 }
-i.ri-user-line.ml-3.mr-3.avatar-icon.text-white.text-decoration-none {
-  font-size: 1.2rem;
+i.avatar-icon {
+  font-size: 1.4rem;
 }
 </style>

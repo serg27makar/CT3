@@ -1,29 +1,42 @@
 <template>
   <nav class="sidebar-menu">
-    <ul>
+    <ul class="list-style-none">
       <template v-for="item in filteredMenu" :key="item.title">
-        <li>
-<!--          <RouterLink-->
-<!--              v-if="!item.children?.length"-->
-<!--              :to="{ name: item.route }"-->
-<!--              class="menu-link"-->
-<!--          >-->
-<!--            <component :is="icons[item.icon]" class="icon" v-if="icons[item.icon]" />-->
-<!--            {{ item.title }}-->
-<!--          </RouterLink>-->
+        <li :class="{ active: isActiveRoute(item.route) }" >
+          <RouterLink
+              v-if="!item.children?.length"
+              :to="'/' + item.route"
+              class="menu-link"
 
-          <div class="menu-group">
-            <div class="menu-group-title">
+          >
+            <component :is="icons[item.icon]" class="icon" v-if="icons[item.icon]" />
+            {{ item.title }}
+          </RouterLink>
+
+          <div v-else class="menu-group">
+            <div class="menu-group-title" @click="toggleGroup(item.title)">
               <component :is="icons[item.icon]" class="icon" v-if="icons[item.icon]" />
               {{ item.title }}
+              <span class="arrow">{{ openGroups.includes(item.title) ? '▾' : '▸' }}</span>
             </div>
-<!--            <ul>-->
-<!--              <li v-for="child in getVisibleChildren(item)" :key="child.title">-->
-<!--                <RouterLink :to="{ name: child.route }" class="menu-link child">-->
-<!--                  {{ child.title }}-->
-<!--                </RouterLink>-->
-<!--              </li>-->
-<!--            </ul>-->
+
+            <transition name="slide-fade">
+              <ul v-show="openGroups.includes(item.title)" class="list-style-none child-menu">
+                <li
+                    v-for="child in getVisibleChildren(item)"
+                    :key="child.title"
+                    :class="{ active: isActiveRoute(child.route) }"
+                >
+                  <RouterLink
+                      :to="'/' + child.route"
+                      class="menu-link child"
+                  >
+                    {{ child.title }}
+                  </RouterLink>
+                </li>
+              </ul>
+            </transition>
+
           </div>
         </li>
       </template>
@@ -32,9 +45,10 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useScopeStore } from '@/stores/scope'
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth'
 import menuItems from '@/layouts/menuItems/menuItems.js'
 
 import {
@@ -55,9 +69,10 @@ const icons = {
 
 const scopeStore = useScopeStore()
 const authStore = useAuthStore()
+const route = useRoute()
 
 const userScopes = computed(() => scopeStore.scope || [])
-const userType = computed(() => authStore.getUserType);
+const userType = computed(() => authStore.getUserType)
 
 function hasAccess(item) {
   const scopesOk = !item.requiredScopes || item.requiredScopes.some(scope => userScopes.value.includes(scope))
@@ -65,15 +80,30 @@ function hasAccess(item) {
   return scopesOk && typesOk
 }
 
+const openGroups = ref([])
+
+function toggleGroup(title) {
+  if (openGroups.value.includes(title)) {
+    openGroups.value = []
+  } else {
+    openGroups.value = [title]
+  }
+}
+
+function isActiveRoute(path) {
+  return route.path === '/' + path
+}
+
 const filteredMenu = computed(() =>
-    menuItems.filter(item => {
-      if (!hasAccess(item)) return false
-      if (item.children) {
-        item.children = item.children.filter(hasAccess)
-        return item.children.length > 0
-      }
-      return true
-    })
+    menuItems
+        .map(item => {
+          if (!hasAccess(item)) return null
+          const children = item.children?.filter(hasAccess) || []
+          return children.length || !item.children
+              ? { ...item, children }
+              : null
+        })
+        .filter(Boolean)
 )
 
 function getVisibleChildren(item) {
@@ -82,41 +112,5 @@ function getVisibleChildren(item) {
 </script>
 
 <style scoped>
-.sidebar-menu {
-  padding: 1rem;
-  background-color: #f4f4f4;
-  height: 100%;
-}
-
-.menu-link {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0;
-  color: #333;
-  text-decoration: none;
-}
-
-.menu-link:hover {
-  color: #007bff;
-}
-
-.menu-group {
-  margin-top: 1rem;
-}
-
-.menu-group-title {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 0.5rem;
-}
-.child {
-  padding-left: 1.5rem;
-}
+@import "./styles/styles.css";
 </style>

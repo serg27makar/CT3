@@ -5,7 +5,6 @@
           v-model="category"
           :options="options"
           placeholder="Select Category"
-          width="20rem"
       />
       <input
           class="input-control ml-4"
@@ -55,11 +54,11 @@ const searchItem = (val) => {
 
 <style lang="scss">
 .main-search-wrapper {
-  width: 60%;
+  width: 100%;
   justify-content: left;
 }
 .main-search {
-  width: 80%;
+  width: 100%;
   min-width: 30rem;
   justify-content: space-around;
 }

@@ -8,44 +8,44 @@ export default [
         title: 'Cases',
         route: 'cases-view-list',
         icon: 'FolderIcon',
-        requiredScopes: ['st3.showcases']
+        requiredScopes: ['st2.showcases']
     },
     {
         title: 'Schedules',
         route: 'manager-scheduler-user-blank',
         icon: 'CalendarIcon',
-        requiredScopes: ['st3.showschedules']
+        requiredScopes: ['st2.showschedules']
     },
     {
         title: 'Clients',
         route: 'clients-view-list',
         icon: 'FileIcon',
-        requiredScopes: ['st3.showclients']
+        requiredScopes: ['st2.showclients']
     },
     {
         title: 'Insured',
         route: 'insured-view-list',
         icon: 'CreditCardIcon',
-        requiredScopes: ['st3.showinsured']
+        requiredScopes: ['st2.showinsured']
     },
     {
         title: 'My Cases',
         route: 'my-cases',
         icon: 'FolderIcon',
         requiredUserTypes: ['User'],
-        requiredScopes: ['st3.showinsured']
+        requiredScopes: ['st2.showinsured']
     },
     {
         title: 'Reporting',
         route: 'reports',
         icon: 'EyeIcon',
-        requiredScopes: ['st3.showreporting']
+        requiredScopes: ['st2.showreporting']
     },
     {
         title: 'Reminders',
         route: 'reminders',
         icon: 'FolderIcon',
-        requiredScopes: ['st3.closecase']
+        requiredScopes: ['st2.closecase']
     },
     {
         title: 'Licenses',
@@ -55,7 +55,7 @@ export default [
             { title: 'Manage Licenses', icon:'none', route: 'licenses'},
             { title: 'Manage Scheduler', icon:'none', route: 'manager-members'},
         ],
-        requiredScopes: ['st3.showlicenses']
+        requiredScopes: ['st2.showlicenses']
     },
     {
         title: 'HR',
@@ -64,7 +64,7 @@ export default [
         children: [
             { title: 'Users', icon:'none', route: 'hr-users'},
         ],
-        requiredScopes: ['st3.showhr']
+        requiredScopes: ['st2.showhr']
     },
     {
         title: 'Admin',
@@ -75,13 +75,13 @@ export default [
             { title: 'Users & Permissions', icon:'none', route: 'admin-users-and-permissions'},
             { title: 'Templates', icon:'none', route:'templates', requiredScopes: ['st2.edittemplates']}
         ],
-        requiredScopes: ['st3.showadminmenu']
+        requiredScopes: ['st2.showadminmenu']
     },
     {
         title: 'Accounting',
         route: 'accounting',
         icon: 'CreditCardIcon',
-        requiredScopes: ['st3.viewlist'],
+        requiredScopes: ['st2.viewlist'],
         children: [
             { title: 'Bulk Invoice Printing', icon:'none', route: 'bulk-invoice-printing'},
             { title: 'Invoice Summary', icon:'none', route: 'invoice-summary-list'},

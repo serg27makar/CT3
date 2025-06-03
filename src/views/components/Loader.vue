@@ -45,27 +45,6 @@ watch(route, init);
 </script>
 
 <style scoped>
-.text-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  perspective: 500px;
-}
+@import "./styles/styles.css";
 
-.rotating-text {
-  font-size: 3rem;
-  font-weight: bold;
-  transform-style: preserve-3d;
-  animation: rotate 3s linear infinite;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotateY(0deg);
-  }
-  100% {
-    transform: rotateY(360deg);
-  }
-}
 </style>

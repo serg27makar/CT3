@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="position-relative">
     <div class="search-toggle cursor-pointer" @click="toggleNotification">
       <i class="ri-notification-3-line notification-icon"></i>
       <span v-if="Notifications && Notifications.length" class="notification-count">{{ Notifications.length }}</span>

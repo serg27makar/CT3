@@ -1,40 +1,27 @@
 <template>
     <div class="header-block bg-custom-primary">
-      <div class="iq-navbar-custom">
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
-            <div class="header-content">
-              <button class="menu-toggle" @click="toggleSidebar" v-if="isMobile">
-                <i class="ri-menu-line"></i>
-              </button>
-            </div>
-            <span class="brand-logo">
-                <img :src="appLogoImage" alt="logo"/>
-            </span>
+      <div class="row m-0 px-2">
+        <div class="logo-col">
+          <div class="header-content">
+            <button class="menu-toggle" @click="toggleSidebar" v-if="isMobile">
+              <i class="ri-menu-line"></i>
+            </button>
           </div>
-          <MainSearch />
-
-
-
-          <div class="navbar navbar-expand-lg navbar-light p-0">
-
-            <div class="navbar-collapse">
-              <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                <!-- Notifications Item -->
-                <li class="nav-item nav-icon dropdown">
-                  <Notifications />
-                </li>
-
-                <!-- User Dropdown -->
-                <li class="caption-content">
-                  <UserInfoDropdown />
-                </li>
-              </ul>
-            </div>
-            <ModeSwitch/>
-
-          </div>
+          <span class="brand-logo">
+              <img :src="appLogoImage" alt="logo"/>
+          </span>
         </div>
+
+        <div class="main-search-col">
+          <MainSearch />
+        </div>
+
+        <div class="items-col">
+          <Notifications />
+          <UserInfoDropdown />
+          <ModeSwitch/>
+        </div>
+
       </div>
     </div>
 </template>
