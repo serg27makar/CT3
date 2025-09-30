@@ -1,30 +1,30 @@
 <template>
   <div class="table-wrapper">
-    <table class="table" :class="{ 'table--hoverable': hoverable }">
+    <table class="table" :class="{ 'table--hoverable': hoverable }" columns="columns">
       <thead>
         <tr>
           <th
             v-for="column in columns"
-            :key="column.key"
+            :key="column.field"
             :class="{
               'table__th--sortable': column.sortable,
-              'table__th--sorted': sortKey === column.key
+              'table__th--sorted': sortKey === column.field
             }"
             @click="handleSort(column)"
           >
             {{ column.label }}
             <span
-              v-if="column.sortable"
+              v-if="!column.sortable"
               class="table__sort-icon"
               :class="{
-                'table__sort-icon--asc': sortKey === column.key && sortOrder === 'asc',
-                'table__sort-icon--desc': sortKey === column.key && sortOrder === 'desc'
+                'table__sort-icon--asc': sortKey === column.field && sortOrder === 'asc',
+                'table__sort-icon--desc': sortKey === column.field && sortOrder === 'desc'
               }"
             >
               ▲
             </span>
           </th>
-          <th v-if="$slots.actions">Действия</th>
+          <th v-if="$slots.actions">Actions</th>
         </tr>
       </thead>
       
@@ -46,11 +46,17 @@
             :key="item.id"
             @click="$emit('row-click', item)"
           >
-            <td v-for="column in columns" :key="column.key">
-              <slot :name="column.key" :item="item">
-                {{ item[column.key] }}
+            <td v-for="column in columns" :key="column.field">
+              <slot :name="column.field" :item="item">
+                <span v-if="typeof column.formatter === 'function'">
+                  {{ column.formatter(item[column.field], item) }}
+                </span>
+                <span v-else>
+                  {{ item[column.field] }}
+                </span>
               </slot>
             </td>
+
             <td v-if="$slots.actions">
               <slot name="actions" :item="item" />
             </td>
@@ -78,7 +84,7 @@ const props = defineProps({
     type: Array,
     required: true,
     validator: (value) => {
-      return value.every(column => 'key' in column && 'label' in column)
+      return value.every(column => 'field' in column && 'label' in column)
     }
   },
   items: {
@@ -107,10 +113,10 @@ const sortOrder = ref('asc')
 const handleSort = (column) => {
   if (!column.sortable) return
   
-  if (sortKey.value === column.key) {
+  if (sortKey.value === column.field) {
     sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
   } else {
-    sortKey.value = column.key
+    sortKey.value = column.field
     sortOrder.value = 'asc'
   }
 }

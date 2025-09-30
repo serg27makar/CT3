@@ -86,7 +86,6 @@ watch(getExpires, (val) => {
 onMounted(() => {
   loopIsLoggedIn();
   document.body.classList = 'fixed-top-navbar top-nav';
-  getCurrentClientName();
 });
 
 onUnmounted(() => {
@@ -180,20 +179,5 @@ const refreshToken = () => {
       .catch(() => {
         signOut();
       });
-};
-
-const getCurrentClientName = () => {
-  apiService.get('client-portal/clients').then((res) => {
-    if (res && res.data) {
-      if (res.data.name) {
-        userStore.setClientName(res.data.name);
-        localStorage.setItem('ClientName', res.data.name);
-      }
-      if (res.data.accountManager) {
-        userStore.setAccountManager(res.data.accountManager);
-        localStorage.setItem('AccountManager', JSON.stringify(res.data.accountManager));
-      }
-    }
-  });
 };
 </script>

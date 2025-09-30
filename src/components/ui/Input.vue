@@ -56,6 +56,23 @@ defineOptions({
 </script>
 
 <style lang="scss" scoped>
+:root {
+  --text-color: #212529;
+  --background-color: #ffffff;
+  --border-color: #8e9296;
+  --primary-color: #4a90e2;
+  --danger-color: #dc3545;
+}
+
+[data-theme="dark"] {
+  --text-color: #f8f9fa;
+  --background-color: #121212;
+  --border-color: #777;
+  --primary-color: #4a90e2;
+  --danger-color: #ff6b6b;
+}
+
+
 .form-group {
   margin-bottom: 1rem;
 }
@@ -80,26 +97,25 @@ defineOptions({
   font-size: 1rem;
   line-height: 1.5;
   color: var(--text-color);
-  background-color: #fff;
+  background-color: var(--background-color);
   background-clip: padding-box;
-  border: 1px solid var(--border-color);
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  
+
   &:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+    box-shadow: 0 0 0 0.1rem rgba(74, 144, 226, 0.25);
   }
-  
+
   &--error {
     border-color: var(--danger-color);
-    
+
     &:focus {
       box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
     }
   }
-  
+
   &:disabled {
     background-color: #e9ecef;
     opacity: 1;
@@ -110,7 +126,7 @@ defineOptions({
   display: block;
   margin-top: 0.25rem;
   font-size: 0.875rem;
-  color: var(--danger-color);
+  color: red;
 }
 
 .hint-message {
