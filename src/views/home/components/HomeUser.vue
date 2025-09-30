@@ -1,20 +1,31 @@
 <template>
   <div class="home-user">
     <h1>Cases I Manage</h1>
-    <div class="controls">
-      <button v-if="authStore.userType !== 'Investigator'" @click="addCase" class="btn">+ Add Case</button>
-      <button v-if="authStore.userType === 'User'" @click="openOperationsManagersModal" class="btn">Operations Managers</button>
-      <div v-if="scopeStore.checkPermission('st2.searchcasesclientnotifications')">
-        Only 3 Day Check-in
-        <input type="checkbox" v-model="onlyCheckIn" />
+      <div class="row mb-1">
+        <div class="col-3">
+          <button v-if="authStore.userType !== 'Investigator'" @click="addCase" class="btn w-100">
+            <span>{{ authStore.userType === "Client" ? "+ Add Claim" : "+ Add Case" }}</span>
+          </button>
+        </div>
+        <div class="col-3">
+          <button v-if="authStore.userType === 'User'" @click="openOperationsManagersModal" class="btn w-100">
+            Operations Managers
+          </button>
+        </div>
+        <div class="col-3">
+          <div v-if="scopeStore.checkPermission('st2.searchcasesclientnotifications')">
+            <Toggle v-model="onlyCheckIn" label="Only 3 Day Check-in"/>
+          </div>
+        </div>
+        <div class="col-3">
+          <Input v-model="searchTerm" placeholder="Search" class="search-input"/>
+        </div>
       </div>
-      <input v-model="searchTerm" placeholder="Search" class="search-input" />
-    </div>
 
-    <Table :items="caseStore.cases" :columns="columnsUsually"/>
+    <Table :items="caseStore.groupedCases" :columns="columnsUsually"/>
 
     <Pagination
-        :totalPages="caseStore.total"
+        :totalPages="caseStore.totalCount"
         v-model:currentPage="currentPage"
         v-model:perPage="perPage"
     />
@@ -32,6 +43,8 @@ import { useCaseStore } from '@/stores/case'
 import { useAuthStore } from '@/stores/auth'
 import { useScopeStore } from '@/stores/scope'
 import OperationsManagersModal from "@/views/home/components/OperationsManagersModal.vue";
+import Input from "@/components/ui/Input.vue";
+import Toggle from "@/components/ui/Toggle.vue";
 
 const router = useRouter()
 const caseStore = useCaseStore()
@@ -62,6 +75,11 @@ const columnsUsually = [
         label: "Created Date",
         field: "DateCreated",
         width: '9rem',
+        formatter: (value) => {
+          if (!value) return "";
+          const date = new Date(value);
+          return date.toLocaleDateString("en-US");
+        }
       },
       {
         label: "Case Due Date",
@@ -93,12 +111,12 @@ const columnsUsually = [
 
 // Init
 onMounted(() => {
-  // caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
+  caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
 })
 
 // Watchers to reload data
 watch([currentPage, perPage, searchTerm, onlyCheckIn], () => {
-  // caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
+  caseStore.fetchCases({ page: currentPage.value, perPage: perPage.value, search: searchTerm.value, onlyCheckIn: onlyCheckIn.value })
 })
 
 // Actions
@@ -114,12 +132,6 @@ const openOperationsManagersModal = () => {
 <style scoped>
 .home-user {
   padding: 1rem;
-}
-.controls {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
 }
 .btn {
   background: #476dae;
