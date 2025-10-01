@@ -130,14 +130,14 @@ const visiblePages = computed(() => {
     font-size: 0.875rem;
     line-height: 1;
     color: var(--text-color);
-    background-color: white;
+    background-color: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: 0.25rem;
     cursor: pointer;
     transition: all 0.2s ease;
     
     &:hover:not(:disabled) {
-      background-color: #f8f9fa;
+      background-color: var(--background-color);
       border-color: var(--primary-color);
       color: var(--primary-color);
     }

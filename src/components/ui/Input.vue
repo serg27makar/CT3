@@ -56,22 +56,6 @@ defineOptions({
 </script>
 
 <style lang="scss" scoped>
-:root {
-  --text-color: #212529;
-  --background-color: #ffffff;
-  --border-color: #8e9296;
-  --primary-color: #4a90e2;
-  --danger-color: #dc3545;
-}
-
-[data-theme="dark"] {
-  --text-color: #f8f9fa;
-  --background-color: #121212;
-  --border-color: #777;
-  --primary-color: #4a90e2;
-  --danger-color: #ff6b6b;
-}
-
 
 .form-group {
   margin-bottom: 1rem;

@@ -25,7 +25,7 @@
     <Table :items="caseStore.groupedCases" :columns="columnsUsually"/>
 
     <Pagination
-        :totalPages="caseStore.totalCount"
+        :totalPages="Math.ceil(caseStore.totalCount / perPage)"
         v-model:currentPage="currentPage"
         v-model:perPage="perPage"
     />
@@ -62,14 +62,17 @@ const columnsUsually = [
       {
         label: "Case",
         field: "FileNumber",
+        sortable: true,
       },
       {
         label: "Client",
         field: "ClientName",
+        sortable: true,
       },
       {
         label: "Subject",
         field: "Subject",
+        sortable: true,
       },
       {
         label: "Created Date",
@@ -79,29 +82,35 @@ const columnsUsually = [
           if (!value) return "";
           const date = new Date(value);
           return date.toLocaleDateString("en-US");
-        }
+        },
+        sortable: true,
       },
       {
         label: "Case Due Date",
         field: "CaseDueDate",
         width: '9rem',
+        sortable: true,
       },
       {
         label: "Completed Date",
         field: "CompletedDate",
         width: '9rem',
+        sortable: true,
       },
       {
         label: "Operations Manager",
         field: "OperationsManager",
+        sortable: true,
       },
       {
         label: "Location",
         field: "Location",
+        sortable: true,
       },
       {
         label: "Logistics",
         field: "DatesToBeConducted",
+        sortable: true,
       },
       {
         label: "Action",

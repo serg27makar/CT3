@@ -12,17 +12,21 @@
             }"
             @click="handleSort(column)"
           >
-            {{ column.label }}
-            <span
-              v-if="!column.sortable"
-              class="table__sort-icon"
-              :class="{
+            <div class="d-flex align-items-center">
+              <div>
+                {{ column.label }}
+              </div>
+              <div
+                  v-if="column.sortable"
+                  class="table__sort-icon"
+                  :class="{
                 'table__sort-icon--asc': sortKey === column.field && sortOrder === 'asc',
                 'table__sort-icon--desc': sortKey === column.field && sortOrder === 'desc'
               }"
-            >
-              ▲
-            </span>
+              >
+                ▲
+              </div>
+            </div>
           </th>
           <th v-if="$slots.actions">Actions</th>
         </tr>
@@ -137,6 +141,7 @@ const sortedItems = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -145,9 +150,14 @@ const sortedItems = computed(() => {
 .table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
-  
-  th, td {
+  background-color: var(--background-color);
+
+  th {
+    padding: 0;
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+  }
+  td {
     padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
@@ -155,12 +165,21 @@ const sortedItems = computed(() => {
   
   th {
     font-weight: 600;
-    background-color: #f8f9fa;
+
+    & > div {
+      padding: 0.3rem;
+      background-color: var(--header-color);
+      height: 3rem;
+
+    }
+    &:first-child {
+      border-left: 1px solid var(--border-color);
+    }
   }
   
   &--hoverable {
     tbody tr:hover {
-      background-color: #f8f9fa;
+      background-color: var(--background-hover-color);
       cursor: pointer;
     }
   }
@@ -170,7 +189,7 @@ const sortedItems = computed(() => {
     user-select: none;
     
     &:hover {
-      background-color: #e9ecef;
+      background-color: var(--background-hover-color);
     }
   }
   
@@ -211,6 +230,11 @@ const sortedItems = computed(() => {
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
   }
+}
+
+.sortable-arrow {
+  line-height: 0.7rem;
+  font-size: 0.8rem;
 }
 
 @keyframes pulse {
