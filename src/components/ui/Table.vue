@@ -6,6 +6,7 @@
           <th
             v-for="column in columns"
             :key="column.field"
+            :style="{ width: column.width || 'auto' }"
             :class="{
               'table__th--sortable': column.sortable,
               'table__th--sorted': sortKey === column.field
@@ -50,14 +51,29 @@
             :key="item.id"
             @click="$emit('row-click', item)"
           >
-            <td v-for="column in columns" :key="column.field">
+            <td
+                v-for="column in columns"
+                :key="column.field"
+                :style="{ width: column.width || 'auto' }"
+            >
               <slot :name="column.field" :item="item">
-                <span v-if="typeof column.formatter === 'function'">
-                  {{ column.formatter(item[column.field], item) }}
-                </span>
-                <span v-else>
-                  {{ item[column.field] }}
-                </span>
+                <template v-if="column.link">
+                  <a :href="typeof column.link === 'function' ? column.link(item) : column.link">
+                    {{ column.extra(item) }}
+                  </a>
+                  <span v-if="typeof column.formatter === 'function'" class="text-muted ms-1">
+                     {{ column.formatter(item[column.field], item) }}
+                  </span>
+                </template>
+
+                <template v-else>
+                  <span v-if="typeof column.formatter === 'function'">
+                    {{ column.formatter(item[column.field], item) }}
+                  </span>
+                  <span v-else>
+                    {{ item[column.field] }}
+                  </span>
+                </template>
               </slot>
             </td>
 

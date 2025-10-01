@@ -22,7 +22,7 @@
         </div>
       </div>
 
-    <Table :items="caseStore.groupedCases" :columns="columnsUsually"/>
+    <Table :items="caseStore.groupedCases" :columns="columns"/>
 
     <Pagination
         :totalPages="Math.ceil(caseStore.totalCount / perPage)"
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import {ref, onMounted, watch, computed} from 'vue'
 import { useRouter } from 'vue-router'
 import Table from '@/components/ui/Table.vue'
 import Pagination from '@/components/ui/Pagination.vue'
@@ -59,65 +59,175 @@ const searchTerm = ref('')
 const onlyCheckIn = ref(false)
 const showOperationsModal = ref(false)
 
+const dateFormater = (value) => {
+  if (!value) return "";
+  const date = new Date(value);
+  return date.toLocaleDateString("en-US");
+}
+const notifyFormat = (val) => {
+  switch (val) {
+    case 0 : return "Today";
+    case 1 : return "Tomorrow";
+    case 2 : return "Two Days";
+    default: return "";
+  }
+}
+
+const showFileNumber = (value) => {
+  return authStore.userType === "Client" ? value.ClaimFileNo || value.FileNumber : value.FileNumber
+}
+
+const mgrDisplay = (item, val) => {
+  if (authStore.userType === "User") {
+    let text;
+    text = val.IsAccountManager ? "Account Mgr, " : "";
+    text = val.IsOperationsManager ? text + "Ops Mgr, " : text;
+    text = val.IsPrimaryCaseAssistant ? text + "Research Mgr, " : text;
+    text = val.IsSecondaryCaseAssistant ? text + "SIU Mgr, " : text;
+    text = val.IsUSPManager ? text + "RCS Mgr, " : text;
+    text = val.IsVendorManager ? text + "Vendor Mgr, " : text;
+    text = val.IsCSRUser ? text + "CSR, " : text;
+    text = val.IsBranchAM ? text + "BR AM, " : text;
+    text = val.IsClientDealOwnerUser ? text + "Deal Owr, " : text;
+    text = val.IsBranchDealOwnerUser ? text + "BR Deal Owr, " : text;
+    text = text.substr(0, text.length - 2)
+    return "(" + text + ")"
+  }
+}
+
 const columnsUsually = [
-      {
-        label: "Case",
-        field: "FileNumber",
-        sortable: true,
-      },
-      {
-        label: "Client",
-        field: "ClientName",
-        sortable: true,
-      },
-      {
-        label: "Subject",
-        field: "Subject",
-        sortable: true,
-      },
-      {
-        label: "Created Date",
-        field: "DateCreated",
-        width: '9rem',
-        formatter: (value) => {
-          if (!value) return "";
-          const date = new Date(value);
-          return date.toLocaleDateString("en-US");
-        },
-        sortable: true,
-      },
-      {
-        label: "Case Due Date",
-        field: "CaseDueDate",
-        width: '9rem',
-        sortable: true,
-      },
-      {
-        label: "Completed Date",
-        field: "CompletedDate",
-        width: '9rem',
-        sortable: true,
-      },
-      {
-        label: "Operations Manager",
-        field: "OperationsManager",
-        sortable: true,
-      },
-      {
-        label: "Location",
-        field: "Location",
-        sortable: true,
-      },
-      {
-        label: "Logistics",
-        field: "DatesToBeConducted",
-        sortable: true,
-      },
-      {
-        label: "Action",
-        field: "Action",
-      }
-    ]
+  {
+    label: "Case",
+    field: "FileNumber",
+    sortable: true,
+    link: (item) => `cases/${item.CaseID}/detail`,
+    extra: showFileNumber,
+    formatter: mgrDisplay
+  },
+  {
+    label: "Client",
+    field: "ClientName",
+    sortable: true,
+  },
+  {
+    label: "Subject",
+    field: "Subject",
+    sortable: true,
+  },
+  {
+    label: "Created Date",
+    field: "DateCreated",
+    width: '8rem',
+    sortable: true,
+    formatter: dateFormater,
+  },
+  {
+    label: "Case Due Date",
+    field: "CaseDueDate",
+    width: '9rem',
+    sortable: true,
+    formatter: dateFormater,
+  },
+  {
+    label: "Completed Date",
+    field: "CompletedDate",
+    width: '9rem',
+    sortable: true,
+  },
+  {
+    label: "Operations Manager",
+    field: "OperationsManager",
+    sortable: true,
+  },
+  {
+    label: "Location",
+    field: "Location",
+    sortable: true,
+  },
+  {
+    label: "Logistics",
+    field: "DatesToBeConducted",
+    sortable: true,
+  },
+  {
+    label: "Action",
+    field: "Action",
+  }
+]
+const clientColumns = [
+  {
+    label: "Claim",
+    field: "FileNumber",
+    sortable: true,
+  },
+  {
+    label: "Subject",
+    field: "Subject",
+    sortable: true,
+  },
+  {
+    label: "Created Date",
+    field: "DateCreated",
+    width: '9rem',
+    sortable: true,
+  },
+  {
+    label: "Completed Date",
+    field: "CompletedDate",
+    width: '9rem',
+    sortable: true,
+  },
+  {
+    label: "Action Scheduled Date",
+    field: "ActionDueDates",
+    width: '9rem',
+    sortable: true,
+  },
+  {
+    label: "Operations Manager",
+    field: "OperationsManager",
+    sortable: true,
+  },
+  {
+    label: "SIU Manager",
+    field: "SecondAssistantManager",
+    sortable: true,
+  },
+  {
+    label: "Recommendations",
+    field: "Recommendation",
+    sortable: true,
+  },
+  {
+    label: "Action",
+    field: "Action",
+  }
+]
+
+const columns = computed(() => {
+  let updatedColumns = [...columnsUsually]
+
+  if (authStore.UserType === "Client") {
+    updatedColumns = [...clientColumns]
+  }
+
+  if (scopeStore.checkPermission("st2.searchcasesclientnotifications")) {
+    const newColumn = {
+      label: "Next Client Checkin",
+      field: "ClientNotifyDay",
+      width: "9rem",
+      sortable: true,
+      formatter: notifyFormat,
+    }
+    const index = updatedColumns.findIndex(col => col.field === "CaseDueDate")
+    if (index !== -1) {
+      updatedColumns.splice(index + 1, 0, newColumn)
+    }
+    return updatedColumns
+  }
+
+  return updatedColumns
+})
 
 // Init
 onMounted(() => {
