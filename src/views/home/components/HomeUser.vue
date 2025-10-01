@@ -26,8 +26,9 @@
 
     <Pagination
         :totalPages="Math.ceil(caseStore.totalCount / perPage)"
+        :totalItems="caseStore.groupedCases.length"
         v-model:currentPage="currentPage"
-        v-model:perPage="perPage"
+        v-model:pageSize="perPage"
     />
 
     <OperationsManagersModal v-if="showOperationsModal" @close="showOperationsModal = false" />
