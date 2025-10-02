@@ -47,8 +47,8 @@
         
         <template v-else-if="items.length">
           <tr
-            v-for="item in sortedItems"
-            :key="item.id"
+            v-for="(item, index) in sortedItems"
+            :key="index"
             @click="$emit('row-click', item)"
           >
             <td
@@ -57,12 +57,29 @@
                 :style="{ width: column.width || 'auto' }"
             >
               <slot :name="column.field" :item="item">
-                <template v-if="column.link">
+                <template v-if="column.field === 'Action'">
+                  <div class="dropdown" @click.stop>
+                    <button class="dropdown__toggle" @click="toggleDropdown(index)">
+                      ⋮
+                    </button>
+                    <ul v-if="openDropdown === index" class="dropdown__menu">
+                      <li
+                          v-for="(action, i) in column.actions"
+                          :key="i"
+                          @click="action.fun(item)"
+                      >
+                        {{ action.text }}
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+
+                <template v-else-if="column.link">
                   <a :href="typeof column.link === 'function' ? column.link(item) : column.link">
                     {{ column.extra(item) }}
                   </a>
                   <span v-if="typeof column.formatter === 'function'" class="text-muted ms-1">
-                     {{ column.formatter(item[column.field], item) }}
+                    {{ column.formatter(item[column.field], item) }}
                   </span>
                 </template>
 
@@ -77,9 +94,6 @@
               </slot>
             </td>
 
-            <td v-if="$slots.actions">
-              <slot name="actions" :item="item" />
-            </td>
           </tr>
         </template>
         
@@ -129,6 +143,7 @@ defineEmits(['row-click', 'sort'])
 
 const sortKey = ref('')
 const sortOrder = ref('asc')
+const openDropdown = ref(null)
 
 const handleSort = (column) => {
   if (!column.sortable) return
@@ -154,6 +169,15 @@ const sortedItems = computed(() => {
     return sortOrder.value === 'asc' ? result : -result
   })
 })
+
+const toggleDropdown = (id) => {
+  openDropdown.value = openDropdown.value === id ? null : id
+}
+
+window.addEventListener("click", () => {
+  openDropdown.value = null
+})
+
 </script>
 
 <style lang="scss" scoped>
@@ -273,4 +297,44 @@ const sortedItems = computed(() => {
     background-position: -200% 0;
   }
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &__toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  &__menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    list-style: none;
+    margin: 0.25rem 0 0;
+    padding: 0.25rem 0;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+
+    li {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: var(--primary-color);
+        color: #fff;
+      }
+    }
+  }
+}
+
 </style> 

@@ -44,7 +44,7 @@
     </select>
 
     <div class="pagination__info">
-      {{ from }}–{{ to }} of {{ totalItems }}
+      {{ from }}–{{ to }} of {{ totalItems  + from -1}}
     </div>
   </nav>
 </template>
@@ -72,7 +72,7 @@ const handlePageChange = (page) => {
 const handlePageSizeChange = (event) => {
   const newSize = Number(event.target.value)
   emit('update:pageSize', newSize)
-  emit('update:currentPage', 1) // сбрасываем на первую страницу
+  emit('update:currentPage', 1)
 }
 
 const visiblePages = computed(() => {
@@ -105,11 +105,15 @@ const visiblePages = computed(() => {
 })
 
 const from = computed(() => {
+  if (props.totalItems === 0) return 0
   return (props.currentPage - 1) * props.pageSize + 1
 })
+
 const to = computed(() => {
-  return Math.min(props.currentPage * props.pageSize, props.totalItems)
+  if (props.totalItems === 0) return 0
+  return Math.min(props.currentPage * props.pageSize, props.totalItems) + from.value -1
 })
+
 </script>
 
 <style lang="scss" scoped>

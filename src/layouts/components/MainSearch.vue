@@ -62,15 +62,12 @@ const searchItem = (val) => {
   min-width: 30rem;
   justify-content: space-around;
 }
-.dark .input-control {
-  color: #eee;
-  background: #3c3c3c;
-}
 .input-control {
+  color: var(--text-color);
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0.35rem;
-  background: white;
+  background: var(--background-color);
   width: 100%;
 }
 .search-icon {

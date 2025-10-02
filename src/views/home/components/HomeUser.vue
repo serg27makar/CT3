@@ -54,7 +54,7 @@ const scopeStore = useScopeStore()
 
 // State
 const currentPage = ref(1)
-const perPage = ref(50)
+const perPage = ref(200)
 const searchTerm = ref('')
 const onlyCheckIn = ref(false)
 const showOperationsModal = ref(false)
@@ -95,11 +95,16 @@ const mgrDisplay = (item, val) => {
   }
 }
 
+const viewCase = (item) => {
+  router.push('/cases/' + item.CaseID + '/detail')
+}
+
 const columnsUsually = [
   {
     label: "Case",
     field: "FileNumber",
     sortable: true,
+    width: '4rem',
     link: (item) => `cases/${item.CaseID}/detail`,
     extra: showFileNumber,
     formatter: mgrDisplay
@@ -108,11 +113,17 @@ const columnsUsually = [
     label: "Client",
     field: "ClientName",
     sortable: true,
+    width: '4rem',
+    link: (item) => `clients/view/${item.ClientID}`,
+    extra: (item) => item.ClientName,
   },
   {
     label: "Subject",
     field: "Subject",
     sortable: true,
+    width: '4rem',
+    link: (item) => `subject/${item.SubjectID}`,
+    extra: (item) => item.Subject,
   },
   {
     label: "Created Date",
@@ -124,14 +135,14 @@ const columnsUsually = [
   {
     label: "Case Due Date",
     field: "CaseDueDate",
-    width: '9rem',
+    width: '8rem',
     sortable: true,
     formatter: dateFormater,
   },
   {
     label: "Completed Date",
     field: "CompletedDate",
-    width: '9rem',
+    width: '8rem',
     sortable: true,
   },
   {
@@ -152,6 +163,12 @@ const columnsUsually = [
   {
     label: "Action",
     field: "Action",
+    actions: [
+      {
+        text: "View Case",
+        fun: viewCase,
+      },
+    ]
   }
 ]
 const clientColumns = [
@@ -159,28 +176,33 @@ const clientColumns = [
     label: "Claim",
     field: "FileNumber",
     sortable: true,
+    width: '4rem',
+    link: (item) => `cases/${item.CaseID}/detail`,
+    extra: showFileNumber,
+    formatter: mgrDisplay
   },
   {
     label: "Subject",
     field: "Subject",
     sortable: true,
+    width: '4rem',
   },
   {
     label: "Created Date",
     field: "DateCreated",
-    width: '9rem',
+    width: '8rem',
     sortable: true,
   },
   {
     label: "Completed Date",
     field: "CompletedDate",
-    width: '9rem',
+    width: '8rem',
     sortable: true,
   },
   {
     label: "Action Scheduled Date",
     field: "ActionDueDates",
-    width: '9rem',
+    width: '8rem',
     sortable: true,
   },
   {
@@ -201,6 +223,12 @@ const clientColumns = [
   {
     label: "Action",
     field: "Action",
+    actions: [
+      {
+        text: "View Case",
+        fun: viewCase,
+      },
+    ]
   }
 ]
 
@@ -215,7 +243,7 @@ const columns = computed(() => {
     const newColumn = {
       label: "Next Client Checkin",
       field: "ClientNotifyDay",
-      width: "9rem",
+      width: "8rem",
       sortable: true,
       formatter: notifyFormat,
     }
@@ -246,6 +274,7 @@ const addCase = () => {
 const openOperationsManagersModal = () => {
   showOperationsModal.value = true
 }
+
 </script>
 
 

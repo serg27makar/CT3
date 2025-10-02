@@ -13,7 +13,7 @@
         <slot name="sidebar" />
       </aside>
 
-      <div class="main-content">
+      <div class="main-content page-bcg">
 
         <main class="content">
           <slot />

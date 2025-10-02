@@ -16,7 +16,7 @@
 
       <router-view v-slot="{ Component }">
           <transition>
-            <component :is="Component" />
+            <component :is="Component"/>
           </transition>
         </router-view>
     </LayoyutVertical>
@@ -33,7 +33,7 @@
         @ok="signOut"
         @cancel="onHide"
     >
-      <div>
+      <div class="modal-text">
         Your session is about to expire due to inactivity. {{ countdown }}
       </div>
     </BaseModal>
@@ -181,3 +181,9 @@ const refreshToken = () => {
       });
 };
 </script>
+
+<style lang="scss">
+.modal-text {
+  color: var(--text-color);
+}
+</style>
