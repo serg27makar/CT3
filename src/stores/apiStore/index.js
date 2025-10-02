@@ -14,7 +14,7 @@ export const useApiStore = defineStore('api', {
     actions: {
         async fetchUsers() {
             try {
-                const res = await apiService.get('/api/users/user?isActiveOnly=true')
+                const res = await apiService.get('users/user?isActiveOnly=true')
                 return res.data.Users.map(d => ({
                     title: `${d.LastName}, ${d.FirstName}`,
                     value: d.UserAccountID
@@ -27,7 +27,7 @@ export const useApiStore = defineStore('api', {
 
         async fetchCoverage() {
             try {
-                const res = await apiService.get('/api/operation-manager-coverage')
+                const res = await apiService.get('operation-manager-coverage')
                 return res.data.length ? res.data : []
             } catch (err) {
                 errorMsg(err)
