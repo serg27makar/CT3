@@ -44,7 +44,7 @@
     </select>
 
     <div class="pagination__info">
-      {{ from }}–{{ to }} of {{ totalItems  + from -1}}
+      {{ from }}–{{ to }} of {{ Math.max(totalItems  + from -1, 0)}}
     </div>
   </nav>
 </template>
@@ -58,7 +58,7 @@ const props = defineProps({
   maxVisiblePages: { type: Number, default: 5 },
   pageSize: { type: Number, default: 50 },
   pageSizes: { type: Array, default: () => [50, 100, 200] },
-  totalItems: { type: Number, required: true } // 🔹 новое свойство
+  totalItems: { type: Number, required: true }
 })
 
 const emit = defineEmits(['update:currentPage', 'update:pageSize'])
