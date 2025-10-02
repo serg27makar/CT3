@@ -13,7 +13,6 @@
 
 <script setup>
 
-// import HomeUser from "@/views/home/HomeUser";
 // import HomeInvestigator from "@/views/home/HomeInvestigator";
 
 import {computed} from "vue";

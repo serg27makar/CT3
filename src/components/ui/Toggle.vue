@@ -47,7 +47,7 @@ const localValue = computed({
   position: relative;
   width: 40px;
   height: 20px;
-  background-color: #cbd5e0;
+  background-color: var(--border-color);
   border-radius: 9999px;
   transition: background-color 0.3s ease;
 }

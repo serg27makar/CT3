@@ -9,6 +9,7 @@
 
 :root {
   --text-color: #212529;
+  --root-background-color: #eff0f6;
   --background-color: #ffffff;
   --background-hover-color: #e9ecef;
   --border-color: #8e9296;
@@ -19,12 +20,21 @@
 
 body.dark {
   --text-color: #f8f9fa;
-  --background-color: #3c3c3c;
+  --root-background-color: #2b2d30;
+  --background-color: #26282e;
   --background-hover-color: #555353;
   --border-color: #777;
   --primary-color: #4a90e2;
   --danger-color: #ff6b6b;
   --header-color: #343a40;
+}
+
+.page-bcg {
+  background-color: var(--root-background-color);
+}
+.dropdown-control,
+.sidebar-menu {
+  background-color: var(--background-color);
 }
 
 
