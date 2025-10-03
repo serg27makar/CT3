@@ -5,8 +5,8 @@
       <HomeUser />
     </template>
     <template v-else>
+      <HomeInvestigator v-if="userType !== 'Client'" />
       <HomeUser />
-<!--      <HomeInvestigator v-if="userType !== 'Client'" />-->
     </template>
   </div>
 </template>
@@ -18,6 +18,7 @@
 import {computed} from "vue";
 import {useAuthStore} from "@/stores/auth/index.js";
 import HomeUser from "@/views/home/components/HomeUser.vue";
+import HomeInvestigator from "@/views/home/components/HomeInvestigator.vue";
 
 const authStore = useAuthStore()
 

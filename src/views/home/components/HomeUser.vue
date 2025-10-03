@@ -25,7 +25,7 @@
     <Table :items="caseStore.groupedCases" :columns="columns"/>
 
     <Pagination
-        :totalPages="Math.ceil(caseStore.totalCount / perPage)"
+        :totalPages="Math.ceil(caseStore.totalCaseCount / perPage)"
         :totalItems="caseStore.groupedCases.length"
         v-model:currentPage="currentPage"
         v-model:pageSize="perPage"
